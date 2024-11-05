@@ -1,0 +1,41 @@
+"status","state","percent"
+"Poor","Australian Capital Territory",3.4
+"Fair","Australian Capital Territory",8.7
+"Good","Australian Capital Territory",26.9
+"Very good","Australian Capital Territory",41.9
+"Excellent","Australian Capital Territory",19.2
+"Poor","New South Wales",3.5
+"Fair","New South Wales",10.6
+"Good","New South Wales",29.3
+"Very good","New South Wales",34.7
+"Excellent","New South Wales",21.9
+"Poor","Northern Territory",2.9
+"Fair","Northern Territory",9.7
+"Good","Northern Territory",31.6
+"Very good","Northern Territory",33.1
+"Excellent","Northern Territory",22.4
+"Poor","Queensland",3.7
+"Fair","Queensland",12.6
+"Good","Queensland",28.2
+"Very good","Queensland",37.7
+"Excellent","Queensland",17.8
+"Poor","South Australia",3.3
+"Fair","South Australia",12.6
+"Good","South Australia",28
+"Very good","South Australia",35.5
+"Excellent","South Australia",20.4
+"Poor","Tasmania",5.1
+"Fair","Tasmania",12.2
+"Good","Tasmania",29.8
+"Very good","Tasmania",34.4
+"Excellent","Tasmania",18.7
+"Poor","Victoria",3
+"Fair","Victoria",8.9
+"Good","Victoria",26
+"Very good","Victoria",38.8
+"Excellent","Victoria",22.7
+"Poor","Western Australia",3
+"Fair","Western Australia",9.3
+"Good","Western Australia",31.4
+"Very good","Western Australia",36.2
+"Excellent","Western Australia",20.4
