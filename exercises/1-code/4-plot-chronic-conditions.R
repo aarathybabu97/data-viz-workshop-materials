@@ -111,3 +111,72 @@ ggsave(filename = paste0('solutions/4-outputs/', Sys.Date(),"-chronic-conditions
        units = 'in')
 
 # ### JAGO ### #
+
+df2Plot <- df2Clean |>
+  mutate(
+    highlight = case_when(
+      condition=="Mental health" ~ 'a',
+      condition=="Allergies" ~ 'b',
+      .default = 'c'),
+    label2 = ifelse(
+      highlight=="c", condition,
+      paste0(condition, " (", percent, "%)")
+    ))
+df2Plot|>
+  ggplot(aes(
+    y = percent,
+    x = date,
+    group = condition,
+    color = highlight,
+    fill = highlight,
+    linewidth = highlight))+
+  geom_line()+
+  geom_point(shape=21)+
+  geom_richtext( data = df2Plot |>
+                   group_by(condition) |>
+                   slice_tail(n=1) |> # Label last point only
+                   filter(! condition %in% c('Cancer', 'Osteoporosis', 'Heart, stroke & vascular')),
+                 aes(
+                   x=as.Date('2023-01-01'),
+                   y = percent, # Nudge one label up and one label down
+                   label = label2,
+                   size=2,
+                   hjust=0),
+                 fill='transparent', label.colour = 'transparent')+
+  scale_color_manual(values = highlightPalette)+
+  # Use the lighten() function
+  scale_fill_manual(values = lighten(highlightPalette, 0.5))+
+  theme(legend.position = "none",plot.margin = margin(t=10, b=10, r=80, l=10),
+        panel.background = element_blank(),
+        panel.grid.major = element_line(color = 'grey90'),
+        axis.ticks.y = element_blank(),
+        axis.ticks.x = element_blank(),
+
+        plot.title = element_markdown(size=12),
+        plot.subtitle = element_text(size=10, color = 'grey30', face = 'bold', vjust=2),
+        plot.caption = element_text(size=8, color = 'grey60')
+
+        )+
+  scale_linewidth_manual(values=c(1.5, 1.5, 0.5))+
+  scale_x_date(NULL,
+               limits = c(as.Date('2000-01-01'), as.Date('2023-01-01')),
+               date_labels = '%Y',
+               breaks = as.Date(c('2000-01-01',
+                                  '2005-01-01',
+                                  '2010-01-01',
+                                  '2015-01-01',
+                                  '2020-01-01',
+                                  '2023-01-01')))+
+  scale_y_continuous(name = NULL,
+                     limits = c(0, 30),
+                     labels = c('0', '10', '20', '30%'))+
+  labs(
+    title = "<span style='color:#BC2C1A;'>**Mental health**</span> and
+             <span style='color:#377771;'>**Allergies**</span> continue to increase",
+    subtitle = "Proportion of population with a chronic condition by selected conditions, 2001-2022",
+    caption = 'Source: National Health Survey, 2022'
+  )+
+  coord_cartesian(clip = 'off')
+
+
+
